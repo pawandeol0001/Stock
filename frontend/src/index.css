@@ -1,0 +1,27 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+@layer base{
+  body{@apply bg-paper text-ink font-body text-lg antialiased}
+  h1,h2,h3,button,label,.ui{@apply font-display}
+  :focus-visible{outline:3px solid #FFB400;outline-offset:2px}
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+@keyframes tick{to{transform:translateX(-50%)}}
+.draw{stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.6s ease-out .2s forwards}
+.area{opacity:0;animation:fade 1s ease-out 1s forwards}
+.pop{opacity:0;animation:fade .4s ease-out forwards}
+.tick{animation:tick 45s linear infinite}
+@media (prefers-reduced-motion:reduce){
+  .draw{animation:none;stroke-dashoffset:0}.area,.pop{animation:none;opacity:1}.tick{animation:none}
+}
+
+/* Layout polish: prevent navigation and form controls from overflowing on small screens. */
+html{scroll-behavior:smooth}
+body{margin:0;min-width:320px}
+button,input,textarea,select{font:inherit}
+img,svg{max-width:100%}
+input,textarea,select{min-width:0}
+@media (max-width:640px){
+  body{@apply text-base}
+  h1{@apply break-words}
+}
